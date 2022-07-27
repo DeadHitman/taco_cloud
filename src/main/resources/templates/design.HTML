@@ -8,6 +8,12 @@
     <link rel="stylesheet" th:href="@{/styles.css}" />
 </head>
 
+<style>
+    .validationError {
+        color: red;
+    }
+</style>
+
 <body>
 <h1>Design your taco!</h1>
 <img th:src="@{/images/taco_cloud.jpg}"/>
@@ -59,6 +65,10 @@
     <div>
         <h3>Name your taco creation:</h3>
         <input type="text" th:field="*{name}"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('name')}"
+              th:errors="*{name}">Name is Reqiured</span>
+
         <br/>
         <button>Submit your taco</button>
     </div>

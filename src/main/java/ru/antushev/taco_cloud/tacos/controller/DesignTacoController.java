@@ -3,9 +3,13 @@ package ru.antushev.taco_cloud.tacos.controller;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +18,8 @@ import ru.antushev.taco_cloud.tacos.enums.Ingredient;
 
 import ru.antushev.taco_cloud.tacos.enums.Ingredient.Type;
 import ru.antushev.taco_cloud.tacos.entity.Taco;
+
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -41,16 +47,23 @@ public class DesignTacoController {
 
             model.addAttribute(type.toString().toLowerCase(),
                     filterByType(ingredients, type));
-
         }
 
         model.addAttribute("design", new Taco());
+
         return "design";
 
     }
 
     @PostMapping
-    public String processDesign(Design design) {
+    public String processDesign(@Valid @ModelAttribute("design") Taco design, Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            log.error("Processing design: " + design);
+
+            return "design";
+
+        }
+
         // Save the taco design…
         // We'll do this in chapter 3
         log.info("Processing design: " + design);
