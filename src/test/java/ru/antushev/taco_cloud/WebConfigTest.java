@@ -17,13 +17,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
-import ru.antushev.taco_cloud.tacos.controller.HomeController;
+import ru.antushev.taco_cloud.tacos.web.WebConfig;
 
 @RunWith(SpringRunner.class)
 
-@WebMvcTest(HomeController.class) /*Веб-тест для HomeController*/
+@WebMvcTest(WebConfig.class) /*Веб-тест для HomeController*/
 
-public class HomeControllerTest {
+public class WebConfigTest {
 
 
     @Autowired
