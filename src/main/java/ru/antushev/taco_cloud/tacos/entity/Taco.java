@@ -3,6 +3,7 @@ package ru.antushev.taco_cloud.tacos.entity;
 import java.util.Date;
 import java.util.List;
 import lombok.Data;
+import ru.antushev.taco_cloud.tacos.enums.Ingredient;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -20,6 +21,6 @@ public class Taco {
     private String name;
 
     @Size(min=1, message="You must choose at least 1 ingredient")
-    private List<String> ingredients;
+    private List<Ingredient> ingredients;
 
 }
